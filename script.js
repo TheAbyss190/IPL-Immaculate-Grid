@@ -267,7 +267,7 @@ function autocomplete(input, array) {
 
             // autocomplete input on clicking a match
             selectButton.onclick = e => {
-                console.log(verifyAttempt(elementDiv));
+                updateAnswer(elementDiv);
             }
 
             autocompleteContainer.appendChild(elementDiv);
@@ -348,6 +348,28 @@ function verifyAttempt(guess) {
 
     return true;
     
+}
+
+let guessesLeft = 9;
+
+function updateAnswer(guess) {
+    let activeAnswer = activeAnswers[0];
+
+    if (verifyAttempt(guess)) {
+        guess.getElementsByClassName('autocompleteText')[0].style.color = 'green';
+        activeAnswer.textContent = guess.getElementsByClassName('autocompleteText')[0].textContent;
+
+        overlay.classList.remove('overlay-active');
+        document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
+        searchContainer.style.opacity = 0;
+        searchContainer.style.pointerEvents = 'none';
+        searching = false;
+    } else {
+        guess.getElementsByClassName('autocompleteText')[0].style.color = 'red';
+    }
+
+    guessesLeft--;
+
 }
 
 html.onclick = e => {
