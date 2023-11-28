@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@500&display=swap');
+
+
+:root {
+
+    --white: #fff;
+    --black: #000;
+    --grey: rgb(72, 72, 72);
+
+    --night: rgb(33, 24, 42);
+    --night-transluscent: rgba(33, 24, 42, 0.95);
+    --dark-purple: #342033ff;
+    --english-violet: #472F50ff;
+    --english-violet-2: #5A3E6Dff;
+    --ultra-violet: #6D4E8Aff;
+    --royal-purple: #805DA6ff;
+    --amethyst: #936CC3ff;
+    --lavender-floral: #A67BE0ff;
+}
+
+body {
+    background-color: var(--english-violet);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+}
+
+header {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 15%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    top: 0;
+    left: 0;
+
+    background-color: var(--dark-purple);
+}
+
+.titleText {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--white);
+    font-size: 24px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: background-color 300ms ease;
+}
+
+.overlay-active {
+    background-color: rgba(0,0,0,0.34);
+}
+
+.grid-container {
+    position: absolute;
+    top: 25vh;
+    left: calc(45% - 20vw);
+    width: 40vw;
+    height: auto;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(4, minmax(70px, 1fr));
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    gap: 0;
+}
+
+.question {
+    font-size: 20px;
+    font-family: 'Montserrat';
+    font-weight: 200;
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.question > img {
+    width: 100%;
+    height: 100%;
+}
+
+.answer:not(.activeAnswer) {
+    border: 1px solid black;
+    background-color: var(--ultra-violet);
+    transition: background-color 300ms ease;
+}
+
+.answer:not(.activeAnswer):hover {
+    background-color: var(--royal-purple);
+}
+
+.activeAnswer {
+    background-color: #000;
+}
+
+#searchContainer {
+    position: absolute;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    top: 20%;
+    left: calc(50% - 20vw);
+    width: 40vw;
+    height: auto;
+
+    transition: opacity 300ms ease;
+}
+
+#searchBarContainer {
+    width: 100%;
+    height: 6vh;
+    min-height: 40px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: var(--night);
+    border-radius: 10px 10px 10px 10px;
+    margin: 10px;
+}
+
+#searchBar {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+.fa-magnifying-glass {
+    color: var(--grey);
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+#searchIconDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+}
+
+.autocompleteContainer {
+    background-color: var(--english-violet);
+    border-radius: 5px;
+    width: 40vw;
+    height: auto;
+    position: relative;
+    overflow: auto;
+}
+
+.autocompleteItem {
+    color: var(--white);
+    padding: 10px;
+    border-bottom: 3px solid var(--dark-purple);
+    font-family: 'Montserrat';
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.autocompleteText {
+    font-weight: 200;
+}
+
+.selectButton {
+    background-color: dodgerblue;
+    font-family: 'Montserrat';
+    border: none;
+    color: var(--white);
+    width: 12%;
+    height: 120%;
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.autocompleteActive {
+    background-color: var(--english-violet-2) !important;
+}
+
