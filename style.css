@@ -101,18 +101,33 @@ header {
     height: 100%;
 }
 
+.answer {
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-size: 20px;
+}
+
 .answer:not(.activeAnswer) {
     border: 1px solid black;
     background-color: var(--ultra-violet);
     transition: background-color 300ms ease;
 }
 
-.answer:not(.activeAnswer):hover {
+.incomplete:not(.activeAnswer):hover {
     background-color: var(--royal-purple);
 }
 
 .activeAnswer {
     background-color: #000;
+}
+
+.complete {
+    background-color: green !important;
+    color: var(--black) !important;
 }
 
 #searchContainer {

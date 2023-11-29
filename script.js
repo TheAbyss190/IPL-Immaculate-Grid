@@ -3,9 +3,7 @@
 const overlay = document.querySelector('.overlay');
 
 const searchContainer = document.querySelector('#searchContainer');
-const searchBarContainer = document.querySelector('#searchBarContainer');
-const searchBar = document.querySelector('#searchBar')
-const grid = document.querySelector('.grid');
+const searchBar = document.querySelector('#searchBar');
 const html = document.querySelector('html');
 const autocompleteContainer = document.querySelector('.autocompleteContainer');
 const autocompleteItems = document.getElementsByClassName('autocompleteItem');
@@ -209,7 +207,7 @@ let searching = false; // to detect if user is searching for a player
 function toggleSearchBar(e) {
 
     if (!searching) {
-        if (e.target.classList.contains('answer')) {
+        if (e.target.classList.contains('incomplete')) {
             overlay.classList.add('overlay-active');
             searchContainer.style.opacity = 1;
             searchContainer.style.pointerEvents = 'auto';
@@ -222,7 +220,7 @@ function toggleSearchBar(e) {
         }
     } else {
 
-        if (!(e.target.classList.contains('activeAnswer') || e.target.classList.contains('search')) || e.key == 'Escape') {
+        if (!(e.target.classList.contains('answer') || e.target.classList.contains('activeAnswer') || e.target.classList.contains('search')) || e.key == 'Escape') {
             overlay.classList.remove('overlay-active');
             document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
             searchContainer.style.opacity = 0;
@@ -358,6 +356,10 @@ function updateAnswer(guess) {
     if (verifyAttempt(guess)) {
         guess.getElementsByClassName('autocompleteText')[0].style.color = 'green';
         activeAnswer.textContent = guess.getElementsByClassName('autocompleteText')[0].textContent;
+        activeAnswer.classList.add('complete');
+        activeAnswer.classList.remove('incomplete');
+
+        guess.removeChild(guess.getElementsByClassName('selectButton')[0]);
 
         overlay.classList.remove('overlay-active');
         document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
