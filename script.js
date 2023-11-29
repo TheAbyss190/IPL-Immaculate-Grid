@@ -316,8 +316,8 @@ function verifyAttempt(guess) {
     let questionIndexes = activeAnswer.id.split('-').slice(1);
     questionIndexes = questionIndexes.map(element => {
         let newElement = parseInt(element);
-        return newElement - 1
-    })
+        return newElement - 1;
+    });
 
     for (let index = 0; index < 2; index++) {
         let isCurrentQuestionCorrect = false;
