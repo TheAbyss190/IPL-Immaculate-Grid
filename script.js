@@ -1,3 +1,6 @@
+// 'players' array found at data/JSON Files/all-players.js
+// 'stats' object found at data/JSON Files/all-stats.js
+
 // Fetching required DOM elements
 
 const overlay = document.querySelector('.overlay');
@@ -8,10 +11,7 @@ const html = document.querySelector('html');
 const autocompleteContainer = document.querySelector('.autocompleteContainer');
 const autocompleteItems = document.getElementsByClassName('autocompleteItem');
 const activeAnswers = document.getElementsByClassName('activeAnswer');
-
-
-console.log(stats);
-console.log(players);
+const guessesLeftDisplay = document.querySelector('.guessesLeftDisplay');
 
 // Defining possible questions
 
@@ -198,14 +198,24 @@ function displayQuestions(questions, questionIDs) {
 // Executing above functions
 
 let questionsGenerated = generateQuestions(teamQuestions, statQuestions);
-console.log(questionsGenerated);
 displayQuestions(questionsGenerated, questionIDs);
 
-
+let isPlaying = true;
+let completedPlayers = []; // empty array to store names of players correctly guessed
 let searching = false; // to detect if user is searching for a player
+
+function checkIfCompleted(guess) {
+    if (completedPlayers.includes(guess.getElementsByClassName('autocompleteText')[0].textContent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 // Function to show search bar on click of grid box
 function toggleSearchBar(e) {
+
+    if (!isPlaying) return;
 
     if (!searching) {
         if (e.target.classList.contains('incomplete')) {
@@ -258,17 +268,18 @@ function autocomplete(input, array) {
             elementText.textContent = element;
             elementDiv.appendChild(elementText);
 
-            let selectButton = document.createElement('button');
-            selectButton.classList.add('search', 'selectButton');
-            selectButton.textContent = 'Select';
-            elementDiv.appendChild(selectButton);
+            if (!(completedPlayers.includes(element))) {
+                let selectButton = document.createElement('button');
+                selectButton.classList.add('search', 'selectButton');
+                selectButton.textContent = 'Select';
+                elementDiv.appendChild(selectButton);
 
-
-            // autocomplete input on clicking a match
-            selectButton.onclick = e => {
-                updateAnswer(elementDiv);
+                // autocomplete input on clicking a match
+                selectButton.onclick = e => {
+                    updateAnswer(elementDiv);
+                }
             }
-
+            
             autocompleteContainer.appendChild(elementDiv);
         }
     }
@@ -286,7 +297,11 @@ function autocomplete(input, array) {
 
         if (e.key == 'Enter') {
             if (currentFocus > -1) {
-                autocompleteItems[currentFocus].getElementsByClassName('selectButton')[0].click();
+                if (!checkIfCompleted(autocompleteItems[currentFocus])) {
+                    autocompleteItems[currentFocus].getElementsByClassName('selectButton')[0].click();
+                } else {
+                    alert('Already guessed!');
+                }
             }
         }
     }
@@ -325,7 +340,9 @@ function verifyAttempt(guess) {
         let question = questionsGenerated[index][questionIndexes[index]];
 
         if (question['questionType'] == 'team') {
-            if (guessStats['teams'].includes(question['name'])) {
+            if (guessStats['teams'].some(element => {
+                return question['identifiers'].includes(element);
+            })) {
                 isCurrentQuestionCorrect = true;
             }
         } else {
@@ -350,6 +367,7 @@ function verifyAttempt(guess) {
 }
 
 let guessesLeft = 9;
+guessesLeftDisplay.textContent = guessesLeft;
 
 function updateAnswer(guess) {
     let activeAnswer = activeAnswers[0];
@@ -360,6 +378,7 @@ function updateAnswer(guess) {
         activeAnswer.classList.add('complete');
         activeAnswer.classList.remove('incomplete');
 
+        completedPlayers.push(guess.getElementsByClassName('autocompleteText')[0].textContent);
         guess.removeChild(guess.getElementsByClassName('selectButton')[0]);
 
         overlay.classList.remove('overlay-active');
@@ -372,7 +391,17 @@ function updateAnswer(guess) {
     }
 
     guessesLeft--;
+    guessesLeftDisplay.textContent = guessesLeft;
 
+    if (guessesLeft == 0) {
+        isPlaying = false;
+
+        overlay.classList.remove('overlay-active');
+        document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
+        searchContainer.style.opacity = 0;
+        searchContainer.style.pointerEvents = 'none';
+        searching = false;
+    }
 }
 
 html.onclick = e => {
