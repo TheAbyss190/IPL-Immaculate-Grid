@@ -9,8 +9,12 @@ const autocompleteContainer = document.querySelector('.autocompleteContainer');
 const autocompleteItems = document.getElementsByClassName('autocompleteItem');
 const activeAnswers = document.getElementsByClassName('activeAnswer');
 
-import stats from "./data/JSON Files/all-stats.json" assert { type: "json" }; // Fetching all stats
-import players from "./data/JSON Files/all-players.json" assert { type: "json" }; // Fetching all player names
+import stats from "/data/JSON Files/all-stats.js"; // Fetching all stats
+import players from "/data/JSON Files/all-players.js"; // Fetching all player names
+
+
+console.log(stats);
+console.log(players);
 
 // Defining possible questions
 
