@@ -698,5 +698,3 @@ const players = [
     "ST Jayasuriya",
     "SB Wagh"
 ]
-
-export default players;

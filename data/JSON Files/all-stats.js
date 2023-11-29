@@ -11826,5 +11826,3 @@ const stats = {
         "runs_conceded": 137
     }
 }
-
-export default stats;
