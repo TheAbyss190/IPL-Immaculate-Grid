@@ -12,6 +12,31 @@ const autocompleteContainer = document.querySelector('.autocompleteContainer');
 const autocompleteItems = document.getElementsByClassName('autocompleteItem');
 const activeAnswers = document.getElementsByClassName('activeAnswer');
 const guessesLeftDisplay = document.querySelector('.guessesLeftDisplay');
+const timerDisplay = document.querySelector('.timer');
+const endGameScreen = document.querySelector('#endGameScreen');
+const emojiGrid = document.querySelector('#emojiGrid');
+const closeScreenIcon = document.querySelector('#closeScreenIcon');
+const finalTimeText = document.querySelector('#finalTimeText');
+
+// Starting a timer
+
+let timer;
+function startTimer(startTime, display) {
+    let time = startTime, minutes, seconds;
+
+    timer = setInterval(function () {
+        minutes = parseInt(time / 60)
+        seconds = parseInt(time % 60);
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        time++;
+    }, 1000);
+}
+
+window.onload = () => {
+    const START_TIME = 0;
+    startTimer(START_TIME, timerDisplay);
+}
 
 // Defining possible questions
 
@@ -162,11 +187,17 @@ const questionIDs = [
     ['question-y-1', 'question-y-2', 'question-y-3']
 ]
 
+const answerIDs = [
+    ['answer-1-1', 'answer-2-1', 'answer-3-1'],
+    ['answer-1-2', 'answer-2-2', 'answer-3-2'],
+    ['answer-1-3', 'answer-2-3', 'answer-3-3']
+]
+
 // Functions to generate and display grid questions
 
-function generateQuestions(...args) {
+function generateQuestions(...questionArrays) {
     const possibleQuestions = [];
-    for (let array of args) {
+    for (let array of questionArrays) {
         possibleQuestions.push(...array);
     }
 
@@ -179,7 +210,7 @@ function generateQuestions(...args) {
         }
     }
 
-    return questionsGenerated
+    return questionsGenerated;
 }
 
 function displayQuestions(questions, questionIDs) {
@@ -212,31 +243,39 @@ function checkIfCompleted(guess) {
     }
 }
 
+function openSearchBar(e) {
+    overlay.classList.add('overlay-active');
+    searchContainer.style.opacity = 1;
+    searchContainer.style.pointerEvents = 'auto';
+    searchBar.focus();
+    e.target.classList.add('activeAnswer');
+    searching = true;
+
+    searchBar.value = '';
+    autocompleteContainer.innerHTML = '';
+}
+
+function closeSearchBar() {
+    overlay.classList.remove('overlay-active');
+    document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
+    searchContainer.style.opacity = 0;
+    searchContainer.style.pointerEvents = 'none';
+    searching = false;
+    
+}
+
 // Function to show search bar on click of grid box
 function toggleSearchBar(e) {
-
     if (!isPlaying) return;
 
     if (!searching) {
         if (e.target.classList.contains('incomplete')) {
-            overlay.classList.add('overlay-active');
-            searchContainer.style.opacity = 1;
-            searchContainer.style.pointerEvents = 'auto';
-            searchBar.focus();
-            e.target.classList.add('activeAnswer');
-            searching = true;
-
-            searchBar.value = '';
-            autocompleteContainer.innerHTML = '';
+            openSearchBar(e);
         }
     } else {
 
         if (!(e.target.classList.contains('answer') || e.target.classList.contains('activeAnswer') || e.target.classList.contains('search')) || e.key == 'Escape') {
-            overlay.classList.remove('overlay-active');
-            document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
-            searchContainer.style.opacity = 0;
-            searchContainer.style.pointerEvents = 'none';
-            searching = false;
+            closeSearchBar()
         }
     }
 }
@@ -256,10 +295,14 @@ function autocomplete(input, array) {
             if (input.value) {
                 return element.toUpperCase().includes(input.value.toUpperCase());
             }
-        }); 
+        });
         
+        let itemsCreated = 0;
+        const MAX_ITEMS = 10;
         // create div for each match, adding to container
         for (let element of filteredArray) {
+            if (itemsCreated > MAX_ITEMS) break;
+
             let elementDiv = document.createElement('div');
             elementDiv.classList.add('search', 'autocompleteItem');
 
@@ -275,12 +318,13 @@ function autocomplete(input, array) {
                 elementDiv.appendChild(selectButton);
 
                 // autocomplete input on clicking a match
-                selectButton.onclick = e => {
+                selectButton.onclick = () => {
                     updateAnswer(elementDiv);
                 }
             }
             
             autocompleteContainer.appendChild(elementDiv);
+            itemsCreated++;
         }
     }
 
@@ -381,11 +425,7 @@ function updateAnswer(guess) {
         completedPlayers.push(guess.getElementsByClassName('autocompleteText')[0].textContent);
         guess.removeChild(guess.getElementsByClassName('selectButton')[0]);
 
-        overlay.classList.remove('overlay-active');
-        document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
-        searchContainer.style.opacity = 0;
-        searchContainer.style.pointerEvents = 'none';
-        searching = false;
+        closeSearchBar();
     } else {
         guess.getElementsByClassName('autocompleteText')[0].style.color = 'red';
     }
@@ -394,14 +434,60 @@ function updateAnswer(guess) {
     guessesLeftDisplay.textContent = guessesLeft;
 
     if (guessesLeft == 0) {
-        isPlaying = false;
-
-        overlay.classList.remove('overlay-active');
-        document.getElementsByClassName('activeAnswer')[0].classList.remove('activeAnswer');
-        searchContainer.style.opacity = 0;
-        searchContainer.style.pointerEvents = 'none';
-        searching = false;
+       endGame();
     }
+}
+
+function endGame() {
+    isPlaying = false;
+    closeSearchBar();
+    clearInterval(timer);
+
+    let finalTime = timerDisplay.textContent;
+    finalTimeText.innerHTML = `You finished this grid in <span id="finalTimeDisplay">${finalTime}</span>`;
+
+    let answers = [
+        [false, false, false],
+        [false, false, false],
+        [false, false, false]
+    ]
+
+    for (let rowIndex in answerIDs) {
+        for (let idIndex in answerIDs[rowIndex]) {
+            if (document.getElementById(answerIDs[rowIndex][idIndex]).classList.contains('complete')) {
+                answers[rowIndex][idIndex] = true;
+            }
+        }
+    }
+
+    for (let row of answers) {
+        for (let answer of row) {
+            emojiGrid.innerHTML += answer ? '🟩' : '⬛️'
+        }
+        emojiGrid.innerHTML += '<br>';
+    }
+
+    overlay.classList.add('overlay-active');
+    endGameScreen.style.display = 'flex';
+    setTimeout(() => endGameScreen.style.opacity = 1, 10);
+
+    function closeScreen() {
+        endGameScreen.style.opacity = 0;
+        setTimeout(() => endGameScreen.style.display = 'none', 500);
+        overlay.classList.remove('overlay-active');
+    }
+
+    endGameScreen.focus();
+
+    html.onclick = e => {
+        if (!(e.target.classList.contains('search') || e.target.classList.contains('endGame'))) closeScreen();
+    }
+
+    html.onkeydown = e => {
+        if (e.key == 'Escape') closeScreen();
+    }
+
+    closeScreenIcon.onclick = () => closeScreen();
 }
 
 html.onclick = e => {
@@ -411,6 +497,5 @@ html.onclick = e => {
 html.onkeydown = e => {
     toggleSearchBar(e)
 }
-
 
 autocomplete(searchBar, players)
