@@ -265,13 +265,11 @@ header {
 
 #endGameScreen {
     z-index: 3;
-    position: absolute;
     box-sizing: border-box;
-    top: 20vh;
-    left: 25vw;
     width: max(300px, 50vw);
     height: auto;
     background-color: var(--english-violet);
+    margin: 10%;
     padding: 20px;
 
     color: white;
