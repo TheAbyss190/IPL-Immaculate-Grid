@@ -465,7 +465,8 @@ function endGame() {
 
     for (let row of answers) {
         for (let answer of row) {
-            emojiGrid.innerHTML, shareGrid += answer ? '🟩' : '⬛️';
+            emojiGrid.innerHTML += answer ? '🟩' : '⬛️';
+            shareGrid += answer ? '🟩' : '⬛️';
         }
         emojiGrid.innerHTML += '<br>';
         shareGrid += '\n';
