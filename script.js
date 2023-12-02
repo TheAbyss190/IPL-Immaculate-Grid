@@ -441,7 +441,7 @@ function updateAnswer(guess) {
 
 function endGame() {
     isPlaying = false;
-    closeSearchBar();
+    if (searching) closeSearchBar();
     clearInterval(timer);
 
     let finalTime = timerDisplay.textContent;
