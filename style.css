@@ -363,7 +363,14 @@ header {
 
 @media screen and (max-width: 590px) {
     .grid-container {
-        width: 70%;
+        width: 70vw;
     }
 
+    .autocompleteContainer {
+        width: 70vw;
+    }
+
+    .selectButton {
+        width: 20%;
+    }
 }
