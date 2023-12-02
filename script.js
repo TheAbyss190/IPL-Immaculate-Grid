@@ -461,23 +461,32 @@ function endGame() {
         }
     }
 
+    let shareGrid = '';
+
     for (let row of answers) {
         for (let answer of row) {
-            emojiGrid.innerHTML += answer ? '🟩' : '⬛️'
+            emojiGrid.innerHTML, shareGrid += answer ? '🟩' : '⬛️';
         }
         emojiGrid.innerHTML += '<br>';
+        shareGrid += '\n';
+    }
+
+    const shareData = {
+        title: `I completed today's IPL Immaculate Grid in ${finalTime}!`,
+        text: `I completed today's IPL Immaculate Grid in ${finalTime}! \n \
+        ${shareGrid}`,
+        url: 'https://theabyss190.github.io/IPL-Immaculate-Grid/'
     }
 
     shareResultsButton.onclick = async() => {
         try {
-            await navigator.share({
-                title: 'Test title',
-                text: 'Test text',
-                url: 'youtube.com'
-            });
-            console.log('worked!')
+            await navigator.share(shareData);
+            shareResultsButton.textContent = 'Success!';
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            shareResultsButton.style.backgroundColor = 'red';
+            shareResultsButton.textContent = 'Oops... there was an error.';
+            shareResultsButton.style.cursor = 'default';
         }
     }
 
