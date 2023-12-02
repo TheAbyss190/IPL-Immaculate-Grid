@@ -473,8 +473,7 @@ function endGame() {
 
     const shareData = {
         title: `I completed today's IPL Immaculate Grid in ${finalTime}!`,
-        text: `I completed today's IPL Immaculate Grid in ${finalTime}!\n${shareGrid}`,
-        url: 'https://theabyss190.github.io/IPL-Immaculate-Grid/'
+        text: `I completed today's IPL Immaculate Grid in ${finalTime}!\n${shareGrid}\nhttps://theabyss190.github.io/IPL-Immaculate-Grid/`,
     }
 
     shareResultsButton.onclick = async() => {
