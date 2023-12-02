@@ -306,6 +306,16 @@ header {
     letter-spacing: 10px;
 }
 
+#shareResultsButton {
+    border: none;
+    padding: 10px 15px;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    background-color: limegreen;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 #closeScreenIcon {
     width: 32px;
     height: 32px;
@@ -337,7 +347,7 @@ header {
         grid-template-rows: 300px auto;
         grid-template-columns: auto;
         place-items: center;
-        row-gap: 12%;
+        row-gap: 8%;
     }
 
     .grid-container {

@@ -17,6 +17,7 @@ const endGameScreen = document.querySelector('#endGameScreen');
 const emojiGrid = document.querySelector('#emojiGrid');
 const closeScreenIcon = document.querySelector('#closeScreenIcon');
 const finalTimeText = document.querySelector('#finalTimeText');
+const shareResultsButton = document.querySelector('#shareResultsButton');
 
 // Starting a timer
 
@@ -465,6 +466,19 @@ function endGame() {
             emojiGrid.innerHTML += answer ? '🟩' : '⬛️'
         }
         emojiGrid.innerHTML += '<br>';
+    }
+
+    shareResultsButton.onclick = async() => {
+        try {
+            await navigator.share({
+                title: 'Test title',
+                text: 'Test text',
+                url: 'youtube.com'
+            });
+            console.log('worked!')
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     overlay.classList.add('overlay-active');
