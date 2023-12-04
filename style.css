@@ -31,8 +31,9 @@ body {
 header {
     position: absolute;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 15%;
+    height: 17%;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -47,6 +48,27 @@ header {
     font-weight: 600;
     color: var(--white);
     font-size: 32px;
+    margin-top: auto;
+}
+
+#headerNav {
+    width: 80%;
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+    font-family: 'Montserrat';
+    color: white;
+    margin-top: auto;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.headerNavItem {
+    padding: 6px 10px;
+    color: white;
+    text-decoration: inherit;
+    background-color: var(--amethyst);
+    border-radius: 5px;
 }
 
 .overlay {
