@@ -4,6 +4,8 @@
 
 :root {
 
+    --default-font: 'Montserrat';
+
     --white: #fff;
     --black: #000;
     --grey: rgb(72, 72, 72);
@@ -20,6 +22,7 @@
 }
 
 body {
+    font-family: var(--default-font);
     background-color: var(--english-violet);
     display: flex;
     flex-direction: column;
@@ -44,7 +47,6 @@ header {
 }
 
 .titleText {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: var(--white);
     font-size: 32px;
@@ -56,7 +58,6 @@ header {
     display: flex;
     gap: 10%;
     justify-content: center;
-    font-family: 'Montserrat';
     color: white;
     margin-top: auto;
     margin-bottom: 15px;
@@ -115,7 +116,6 @@ header {
 
 .question {
     font-size: 18px;
-    font-family: 'Montserrat';
     font-weight: 200;
     color: white;
     padding: 5px;
@@ -137,7 +137,6 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Montserrat';
     font-size: 18px;
     text-wrap: wrap;
 }
@@ -227,7 +226,6 @@ header {
     color: var(--white);
     padding: 10px;
     border-bottom: 3px solid var(--dark-purple);
-    font-family: 'Montserrat';
     width: 100%;
     height: 50px;
     position: relative;
@@ -243,13 +241,13 @@ header {
 
 .selectButton {
     background-color: dodgerblue;
-    font-family: 'Montserrat';
     border: none;
     color: var(--white);
     width: 12%;
     height: 120%;
     text-align: center;
     font-size: 13px;
+    font-family: var(--default-font);
     cursor: pointer;
 }
 
@@ -264,7 +262,6 @@ header {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    font-family: 'Montserrat';
     color: white;
 }
 
@@ -277,7 +274,6 @@ header {
 .display {
     font-size: 50px;
     font-weight: 600;
-    font-family: 'Montserrat';
 }
 
 .timer {
@@ -311,7 +307,6 @@ header {
 }
 
 #finalTimeText {
-    font-family: "Montserrat";
     font-size: 20px;
     font-weight: 200;
 }
@@ -329,7 +324,6 @@ header {
 #shareResultsButton {
     border: none;
     padding: 10px 15px;
-    font-family: 'Montserrat';
     font-size: 16px;
     background-color: limegreen;
     border-radius: 8px;
@@ -349,7 +343,6 @@ header {
     justify-content: center;
     align-items: center;
 
-    font-family: "Montserrat";
     font-weight: 200;
     color: lightgray;
     font-size: 20px;
