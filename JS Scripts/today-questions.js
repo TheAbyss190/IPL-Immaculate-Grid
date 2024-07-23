@@ -2,43 +2,43 @@ const teamQuestions = [
     {
         'questionType': 'team',
         'name': "Mumbai Indians",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/MI/Logos/Logooutline/MIoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png',
         'identifiers': ['Mumbai Indians']
     },
     {
         'questionType': 'team',
         'name': "Sunrisers Hyderabad",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/SRH/Logos/Logooutline/SRHoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/SRH/Logos/Logooutline/SRHoutline.png',
         'identifiers': ['Sunrisers Hyderabad', 'Deccan Chargers']
     },
     {
         'questionType': 'team',
         'name': "Royal Challengers Bangalore",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/RCB/Logos/Logooutline/RCBoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/RCB/Logos/Logooutline/RCBoutline.png',
         'identifiers': ['Royal Challengers Bangalore']
     },
     {
         'questionType': 'team',
         'name': "Punjab Kings",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png',
         'identifiers': ['Punjab Kings', 'Kings XI Punjab']
     },
     {
         'questionType': 'team',
         'name': "Delhi Capitals",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/DC/Logos/LogoOutline/DCoutline.png',
+        'display': 'https://www.iplt20.com/teams/delhi-capitals',
         'identifiers': ['Delhi Capitals', 'Delhi Daredevils']
     },
     {
         'questionType': 'team',
         'name': "Kolkata Knight Riders",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/KKR/Logos/Logooutline/KKRoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/KKR/Logos/Logooutline/KKRoutline.png',
         'identifiers': ['Kolkata Knight Riders']
     },
     {
         'questionType': 'team',
         'name': "Chennai Super Kings",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/CSK/logos/Logooutline/CSKoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/CSK/logos/Logooutline/CSKoutline.png',
         'identifiers': ['Chennai Super Kings']
     },
     // {
@@ -50,19 +50,19 @@ const teamQuestions = [
     {
         'questionType': 'team',
         'name': "Rajasthan Royals",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/RR/Logos/Logooutline/RRoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/RR/Logos/Logooutline/RRoutline.png',
         'identifiers': ['Rajasthan Royals']
     },
     {
         'questionType': 'team',
         'name': "Gujarat Titans",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/GT/Logos/Logooutline/GToutline.png',
+        'display': 'https://documents.iplt20.com/ipl/GT/Logos/Logooutline/GToutline.png',
         'identifiers': ['Gujarat Titans']
     },
     {
         'questionType': 'team',
         'name': "Lucknow Super Giants",
-        'display': 'https://bcciplayerimages.s3.ap-south-1.amazonaws.com/ipl/LSG/Logos/Logooutline/LSGoutline.png',
+        'display': 'https://documents.iplt20.com/ipl/LSG/Logos/Logooutline/LSGoutline.png',
         'identifiers': ['Lucknow Super Giants']
     },
     // {
