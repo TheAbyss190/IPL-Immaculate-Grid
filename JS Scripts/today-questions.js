@@ -26,7 +26,7 @@ const teamQuestions = [
     {
         'questionType': 'team',
         'name': "Delhi Capitals",
-        'display': 'https://www.iplt20.com/teams/delhi-capitals',
+        'display': 'https://documents.iplt20.com/ipl/DC/Logos/LogoOutline/DCoutline.png',
         'identifiers': ['Delhi Capitals', 'Delhi Daredevils']
     },
     {
