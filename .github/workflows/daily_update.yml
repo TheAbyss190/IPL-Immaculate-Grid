@@ -20,18 +20,15 @@ jobs:
 
       - name: Download and Extract Data
         run: |
-          # 1. Ensure the 'data' directory exists
           mkdir -p data
+          # Use -f to fail the script if the URL returns a 404/500 error
+          curl -fL -o ipl_json.zip "https://cricsheet.org/downloads/ipl_json.zip"
           
-          # 2. Download the ZIP
-          curl -L -o ipl_json.zip "https://cricsheet.org/downloads/ipl_json.zip"
+          # Debug: Show the first few lines of the file to see if it's HTML
+          head -n 5 ipl_json.zip
           
-          # 3. Extract contents into [repo root]/data/
-          # -o overwrites, -d specifies the destination
+          # Try to unzip
           unzip -o ipl_json.zip -d ./data/
-          
-          # 4. Clean up zip
-          rm ipl_json.zip
 
       - name: Run Python Script
         run: |
