@@ -3,3 +3,6 @@
 /data.ipynb
 /test.json
 /test2.json
+data/*
+!data/.gitkeep
+data/.DS_Store

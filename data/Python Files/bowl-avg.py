@@ -1,5 +1,6 @@
 import json
 
+
 with open('data/JSON Files/all-stats.json', 'r') as f:
     stats = json.load(f)
 
