@@ -28,7 +28,7 @@ jobs:
           head -n 5 ipl_json.zip
           
           # Try to unzip
-          unzip -o ipl_json.zip -d ./data/
+          unzip -o ipl_json.zip -d ./data/ipl_json
 
       - name: Run Python Script
         run: |
