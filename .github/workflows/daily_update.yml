@@ -1,0 +1,49 @@
+name: Daily Stat Updater
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch: 
+
+jobs:
+  execute-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Download and Extract Data
+        run: |
+          # 1. Ensure the 'data' directory exists
+          mkdir -p data
+          
+          # 2. Download the ZIP
+          curl -L -o ipl_json.zip "https://cricsheet.org/downloads/ipl_json.zip"
+          
+          # 3. Extract contents into [repo root]/data/
+          # -o overwrites, -d specifies the destination
+          unzip -o ipl_json.zip -d ./data/
+          
+          # 4. Clean up zip
+          rm ipl_json.zip
+
+      - name: Run Python Script
+        run: |
+          python ./data/Python Files/all-players.py
+          python ./data/Python Files/average.py
+          python ./data/Python Files/bowl-avg.py
+          python ./data/Python Files/economy.py
+          python ./data/Python Files/matches.py
+          python ./data/Python Files/player-identifiers.py
+          python ./data/Python Files/removing.py
+          python ./data/Python Files/runs.py
+          python ./data/Python Files/stats-init.py
+          python ./data/Python Files/strike-rate.py
+          python ./data/Python Files/teams.py
+          python ./data/Python Files/wickets.py
