@@ -35,15 +35,15 @@ jobs:
 
       - name: Run Python Script
         run: |
-          python ./data/Python Files/all-players.py
-          python ./data/Python Files/average.py
-          python ./data/Python Files/bowl-avg.py
-          python ./data/Python Files/economy.py
-          python ./data/Python Files/matches.py
-          python ./data/Python Files/player-identifiers.py
-          python ./data/Python Files/removing.py
-          python ./data/Python Files/runs.py
-          python ./data/Python Files/stats-init.py
-          python ./data/Python Files/strike-rate.py
-          python ./data/Python Files/teams.py
-          python ./data/Python Files/wickets.py
+          python "./data/Python Files/all-players.py"
+          python "./data/Python Files/average.py"
+          python "./data/Python Files/bowl-avg.py"
+          python "./data/Python Files/economy.py"
+          python "./data/Python Files/matches.py"
+          python "./data/Python Files/player-identifiers.py"
+          python "./data/Python Files/removing.py"
+          python "./data/Python Files/runs.py"
+          python "./data/Python Files/stats-init.py"
+          python "./data/Python Files/strike-rate.py"
+          python "./data/Python Files/teams.py"
+          python "./data/Python Files/wickets.py"
