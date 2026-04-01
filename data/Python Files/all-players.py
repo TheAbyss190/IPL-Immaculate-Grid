@@ -1,7 +1,8 @@
 import os
 import json
 
-dir_path = '/Users/rishabnarayana/Documents/Coding Projects/IPL Immaculate Grid/data/ipl_json'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dir_path = os.path.join(script_dir, "..", "ipl_json")
 
 all_players_obj = {}
 

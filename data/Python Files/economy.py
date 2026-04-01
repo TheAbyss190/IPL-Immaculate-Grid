@@ -4,7 +4,8 @@ import os
 with open('data/JSON Files/all-stats.json', 'r') as f:
     stats = json.load(f)
 
-dir_path = '/Users/rishabnarayana/Documents/Coding Projects/IPL Immaculate Grid/data/ipl_json'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dir_path = os.path.join(script_dir, "..", "ipl_json")
 
 for file in os.listdir(dir_path):
     if file.endswith('.json'):
